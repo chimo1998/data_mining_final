@@ -22,10 +22,13 @@ class Model:
     def predict(self):
         raise NotImplementedError
 
+    def proba(self):
+        raise NotImplementedError
+
     def get_sample_weight(self,data):
         uni, idx = np.unique(data, return_inverse=True)
         print(uni, idx)
-        w = [1 / (sum(data==u)/len(data)) for u in uni]
+        w = [1 / ((sum(data==u) ** 1.02)/len(data) +0.23) for u in uni]
         print(w)
         return [w[i] for i in idx]
 
@@ -59,5 +62,12 @@ class GBC(Model):
 
     def predict(self):
         pred = self.model.predict(self.Xtrain)
-        print(sum(pred == self.Ytrain))
+        ''' this is for checking the predict result
+        for i in range(3):
+            print("real %d, predict %d" % (sum(self.Ytrain==(i+1)), sum(pred==(i+1))))
+            print(sum(((self.Ytrain==(i+1)) & (pred==(i+1)))))
+        '''
         return pred
+
+    def proba(self):
+        return self.model.predict_proba(self.Xtrain)
