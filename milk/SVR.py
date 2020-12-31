@@ -6,7 +6,7 @@ import pandas as pd
 
 uci = Info()
 train_x, train_y, test_x, test_y = uci()
-svr = SVR(kernel='rbf',gamma='auto',C=1)
+svr = SVR(kernel='rbf',gamma=0.02,C=1.3)
 print("a")
 svr.fit(train_x, train_y)
 print("b")

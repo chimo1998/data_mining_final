@@ -61,7 +61,7 @@ class GBC(Model):
         print(self.model.score(self.Xtrain, self.Ytrain))
 
     def predict(self):
-        pred = self.model.predict(self.Xtrain)
+        pred = self.model.predict(self.Xtest)
         ''' this is for checking the predict result
         for i in range(3):
             print("real %d, predict %d" % (sum(self.Ytrain==(i+1)), sum(pred==(i+1))))
@@ -70,4 +70,4 @@ class GBC(Model):
         return pred
 
     def proba(self):
-        return self.model.predict_proba(self.Xtrain)
+        return self.model.predict_proba(self.Xtest)
